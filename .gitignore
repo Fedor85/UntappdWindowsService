@@ -1,0 +1,21 @@
+# Visual Studiocache/options directory
+src/.vs/
+
+#NuGet packages
+src/packages/
+
+#obj
+src/*/obj/
+
+#bin
+/bin
+src/*/bin/
+
+#build
+build/*
+
+#Temp Files
+~*
+
+#tools
+tools/NuGetPackagesBackup/Log.txt
