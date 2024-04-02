@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdWindowsService", "UntappdWindowsService\UntappdWindowsService.csproj", "{5F804EB0-9D21-47A8-B3F1-E2C6FBDAA4D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UntappdWindowsService", "UntappdWindowsService\UntappdWindowsService.csproj", "{5F804EB0-9D21-47A8-B3F1-E2C6FBDAA4D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdWindowsService.Interfaces", "UntappdWindowsService.Interfaces\UntappdWindowsService.Interfaces.csproj", "{D8D1D4A1-ACE3-4B77-B067-11C0A58DBCBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdWindowsService.Infrastructure", "UntappdWindowsService.Infrastructure\UntappdWindowsService.Infrastructure.csproj", "{17FC349F-DD21-45CF-8604-0A191ACA7C6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdWindowsService.Test", "UntappdWindowsService.Test\UntappdWindowsService.Test.csproj", "{CCC95788-8ACA-4198-9C82-2409B4EBA911}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,17 @@ Global
 		{5F804EB0-9D21-47A8-B3F1-E2C6FBDAA4D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F804EB0-9D21-47A8-B3F1-E2C6FBDAA4D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F804EB0-9D21-47A8-B3F1-E2C6FBDAA4D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8D1D4A1-ACE3-4B77-B067-11C0A58DBCBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8D1D4A1-ACE3-4B77-B067-11C0A58DBCBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8D1D4A1-ACE3-4B77-B067-11C0A58DBCBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8D1D4A1-ACE3-4B77-B067-11C0A58DBCBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17FC349F-DD21-45CF-8604-0A191ACA7C6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17FC349F-DD21-45CF-8604-0A191ACA7C6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17FC349F-DD21-45CF-8604-0A191ACA7C6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17FC349F-DD21-45CF-8604-0A191ACA7C6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCC95788-8ACA-4198-9C82-2409B4EBA911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCC95788-8ACA-4198-9C82-2409B4EBA911}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCC95788-8ACA-4198-9C82-2409B4EBA911}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
