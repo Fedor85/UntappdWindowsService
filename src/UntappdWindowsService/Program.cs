@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UntappdWindowsService.Infrastructure;
+using UntappdWindowsService.Interfaces;
 
 namespace UntappdWindowsService
 {
@@ -9,26 +10,32 @@ namespace UntappdWindowsService
     {
         static void Main(string[] args)
         {
-            ConfigurationServices();
             HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
-            builder.Services.AddWindowsService(options =>
-            {
-                options.ServiceName = "UntappdWindowsService";
-            });
+            AddServices(builder);
+            
+            builder.Services.AddWindowsService(ConfigureWindowsService);
+            builder.Services.AddHostedService<Worker>();
 
-            builder.Services.AddHostedService(GetWorker);
             IHost host = builder.Build();
             host.Run();
         }
 
-        private static void ConfigurationServices()
+        private static void AddServices(IHostApplicationBuilder hostApplicationBuilder)
         {
-            Global.AddService(new Logger());
+            hostApplicationBuilder.Services.AddSingleton<IConfigurationService, ConfigurationService>();
+            hostApplicationBuilder.Services.AddSingleton<ILogger, Logger>();
+            hostApplicationBuilder.Services.AddSingleton<IWindowsService, UntappdWindowsService>();
         }
 
-        private static Worker GetWorker(IServiceProvider serviceProvider)
+        private static void ConfigureWindowsService(WindowsServiceLifetimeOptions options)
         {
-            return new Worker(new UntappdWindowsService());
+            options.ServiceName = Constants.ServicName;
+        }
+
+        public static void StopService(ILogger logger, Exception e)
+        {
+            logger?.Log(e.Message);
+            Environment.Exit(1);
         }
     }
 }

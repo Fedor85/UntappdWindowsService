@@ -5,11 +5,13 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UntappdWindowsService", "UntappdWindowsService\UntappdWindowsService.csproj", "{5F804EB0-9D21-47A8-B3F1-E2C6FBDAA4D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdWindowsService.Interfaces", "UntappdWindowsService.Interfaces\UntappdWindowsService.Interfaces.csproj", "{D8D1D4A1-ACE3-4B77-B067-11C0A58DBCBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UntappdWindowsService.Interfaces", "UntappdWindowsService.Interfaces\UntappdWindowsService.Interfaces.csproj", "{D8D1D4A1-ACE3-4B77-B067-11C0A58DBCBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdWindowsService.Infrastructure", "UntappdWindowsService.Infrastructure\UntappdWindowsService.Infrastructure.csproj", "{17FC349F-DD21-45CF-8604-0A191ACA7C6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UntappdWindowsService.Infrastructure", "UntappdWindowsService.Infrastructure\UntappdWindowsService.Infrastructure.csproj", "{17FC349F-DD21-45CF-8604-0A191ACA7C6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UntappdWindowsService.Test", "UntappdWindowsService.Test\UntappdWindowsService.Test.csproj", "{CCC95788-8ACA-4198-9C82-2409B4EBA911}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UntappdWindowsService.Test", "UntappdWindowsService.Test\UntappdWindowsService.Test.csproj", "{CCC95788-8ACA-4198-9C82-2409B4EBA911}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UntappdWindowsService.Domain", "UntappdWindowsService.Domain\UntappdWindowsService.Domain.csproj", "{EAD8F8F0-6191-4DD1-8819-975DBB947FE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{CCC95788-8ACA-4198-9C82-2409B4EBA911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CCC95788-8ACA-4198-9C82-2409B4EBA911}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCC95788-8ACA-4198-9C82-2409B4EBA911}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAD8F8F0-6191-4DD1-8819-975DBB947FE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAD8F8F0-6191-4DD1-8819-975DBB947FE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAD8F8F0-6191-4DD1-8819-975DBB947FE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAD8F8F0-6191-4DD1-8819-975DBB947FE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

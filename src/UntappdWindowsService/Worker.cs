@@ -1,14 +1,13 @@
 ﻿using Microsoft.Extensions.Hosting;
-using UntappdWindowsService.Infrastructure;
 using UntappdWindowsService.Interfaces;
 
 namespace UntappdWindowsService
 {
-    public class Worker(IWindowsService service) : BackgroundService
+    public class Worker(IWindowsService service, ILogger logger) : BackgroundService
     {
-        private IWindowsService service = service;
+        private readonly IWindowsService service = service;
 
-        private ILogger? logger = Global.GetService<ILogger>();
+        private readonly ILogger logger = logger;
 
         public override Task StartAsync(CancellationToken cancellationToken)
         {
@@ -18,7 +17,7 @@ namespace UntappdWindowsService
             }
             catch (Exception e)
             {
-                StopService(e);
+                Program.StopService(logger, e);
             }
             return base.StartAsync(cancellationToken);
         }
@@ -36,15 +35,9 @@ namespace UntappdWindowsService
             }
             catch (Exception e)
             {
-                StopService(e);
+                Program.StopService(logger, e);
             }
             return base.StopAsync(cancellationToken);
-        }
-
-        private void StopService(Exception e)
-        {
-            logger?.Log(e.Message);
-            Environment.Exit(1);
         }
     }
 }

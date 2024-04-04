@@ -1,11 +1,10 @@
-﻿using UntappdWindowsService.Infrastructure;
-using UntappdWindowsService.Interfaces;
+﻿using UntappdWindowsService.Interfaces;
 
 namespace UntappdWindowsService
 {
-    public class UntappdWindowsService: IWindowsService
+    public class UntappdWindowsService(ILogger logger) : IWindowsService
     {
-        private ILogger? logger = Global.GetService<ILogger>();
+        private readonly ILogger logger = logger;
 
         public void Start()
         {

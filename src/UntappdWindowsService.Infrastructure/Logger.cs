@@ -2,21 +2,11 @@
 
 namespace UntappdWindowsService.Infrastructure
 {
-    public class Logger: ILogger
+    public class Logger(IConfigurationService configurationService) : ILogger
     {
-        private string filePath;
+        private readonly string filePath = configurationService.LopFilePath;
 
         private object locker = new();
-
-        public Logger()
-        {
-            string directoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Untappd");
-            if (!Directory.Exists(directoryPath))
-                Directory.CreateDirectory(directoryPath);
-            
-
-            filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UntappdWindowsServiceLog.txt");
-        }
 
         public void Log(string message)
         {
