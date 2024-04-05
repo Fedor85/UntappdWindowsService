@@ -10,7 +10,7 @@ namespace UntappdWindowsService.Test
         [TestMethod]
         public void TestLog()
         {
-            ILogger logger = new Logger();
+            ILogger logger = new Logger(new ConfigurationService());
             logger.Log("TestLog");
         }
     }

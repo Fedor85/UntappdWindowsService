@@ -1,11 +1,10 @@
-﻿using System.ServiceModel;
+﻿using CoreWCF;
 
-namespace UntappdWindowsService.WcfService.Interface
+namespace UntappdWindowsService.WCFService.Services
 {
     [ServiceContract]
-    public interface IUntappdWcfService
+    public interface IClearTemp
     {
-
         [OperationContract]
         void RegisterProcessesIdByTempFiles(string processeId, string tempFilesPath);
     }

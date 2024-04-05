@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UntappdWindowsService.Infrastructure;
 using UntappdWindowsService.Interfaces;
+using UntappdWindowsService.WCFService;
 
 namespace UntappdWindowsService
 {
@@ -24,7 +25,7 @@ namespace UntappdWindowsService
         {
             hostApplicationBuilder.Services.AddSingleton<IConfigurationService, ConfigurationService>();
             hostApplicationBuilder.Services.AddSingleton<ILogger, Logger>();
-            hostApplicationBuilder.Services.AddSingleton<IWindowsService, UntappdWindowsService>();
+            hostApplicationBuilder.Services.AddSingleton<IWindowsWCFService, UntappdWindowsWCFService>();
         }
 
         private static void ConfigureWindowsService(WindowsServiceLifetimeOptions options)
@@ -34,7 +35,7 @@ namespace UntappdWindowsService
 
         public static void StopService(ILogger logger, Exception e)
         {
-            logger?.Log(e.Message);
+            logger?.Log($"Stop\\Exit Service: {e.Message}");
             Environment.Exit(1);
         }
     }

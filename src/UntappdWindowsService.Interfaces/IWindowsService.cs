@@ -1,9 +1,13 @@
 ﻿namespace UntappdWindowsService.Interfaces
 {
-    public interface IWindowsService
+    public interface IWindowsWCFService
     {
-        void Start();
+        void Initialize();
 
-        void Stop();
+        void RunAsync();
+
+        void Run();
+
+        void StopAsync();
     }
 }

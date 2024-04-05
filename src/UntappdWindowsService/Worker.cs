@@ -3,17 +3,15 @@ using UntappdWindowsService.Interfaces;
 
 namespace UntappdWindowsService
 {
-    public class Worker(IWindowsService service, ILogger logger) : BackgroundService
+    public class Worker(IWindowsWCFService service, ILogger logger) : BackgroundService
     {
-        private readonly IWindowsService service = service;
-
-        private readonly ILogger logger = logger;
-
         public override Task StartAsync(CancellationToken cancellationToken)
         {
             try
             {
-                service.Start();
+                logger.Log("Start UntappdWindowsService");
+                service.Initialize();
+                service.RunAsync();
             }
             catch (Exception e)
             {
@@ -31,7 +29,8 @@ namespace UntappdWindowsService
         {
             try
             {
-                service.Stop();
+                service.StopAsync();
+                logger.Log("Stop UntappdWindowsService");
             }
             catch (Exception e)
             {
