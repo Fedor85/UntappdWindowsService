@@ -2,7 +2,7 @@
 using UntappdWindowsService.Extension.Interfaces;
 using UntappdWindowsService.Extension.Services;
 
-namespace UntappdWindowsService.Сlient
+namespace UntappdWindowsService.Client
 {
     public class UntappdWindowsServiceClient(string untappdWCFServiceUrl) : IUntappdWindowsServiceClient
     {

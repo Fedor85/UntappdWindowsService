@@ -2,9 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
+using UntappdWindowsService.Client;
 using UntappdWindowsService.Extension.Interfaces;
 using UntappdWindowsService.Interfaces;
-using UntappdWindowsService.Сlient;
 
 namespace UntappdWindowsService.Test
 {

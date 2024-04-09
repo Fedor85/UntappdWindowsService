@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using UntappdWindowsService.Client;
 using UntappdWindowsService.Domain;
 using UntappdWindowsService.Extension.Interfaces;
 using UntappdWindowsService.Infrastructure;
 using UntappdWindowsService.Interfaces;
 using UntappdWindowsService.WCFService;
-using UntappdWindowsService.Сlient;
 
 namespace UntappdWindowsService.Test
 {

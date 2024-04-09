@@ -22,7 +22,7 @@
     <ProjectReference Include="..\UntappdWindowsService.Infrastructure\UntappdWindowsService.Infrastructure.csproj" />
     <ProjectReference Include="..\UntappdWindowsService.Interfaces\UntappdWindowsService.Interfaces.csproj" />
     <ProjectReference Include="..\UntappdWindowsService.WCFService\UntappdWindowsService.WCFService.csproj" />
-    <ProjectReference Include="..\UntappdWindowsService.WCFСlient\UntappdWindowsService.Сlient.csproj" />
+    <ProjectReference Include="..\UntappdWindowsService.WCFСlient\UntappdWindowsService.Client.csproj" />
   </ItemGroup>
 
   <ItemGroup>
