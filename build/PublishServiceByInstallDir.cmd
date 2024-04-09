@@ -1,5 +1,5 @@
 SET installdir=E:\Services
 
 Del /S /Q %installdir%\*
-call PublishProfile.cmd
+call PublishService.cmd
 Xcopy /E /I publish %installdir%

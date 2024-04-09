@@ -1,0 +1,2 @@
+call PublishServiceByInstallDir.cmd
+call GenerateNuGet.cmd
