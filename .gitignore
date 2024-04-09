@@ -14,6 +14,9 @@ src/*/bin/
 #build
 build/*
 
+#TestResults
+src/TestResults/*
+
 #Temp Files
 ~*
 
