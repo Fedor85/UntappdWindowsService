@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UntappdWindowsService.Domai
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UntappdWindowsService.Extension", "UntappdWindowsService.Extension\UntappdWindowsService.Extension.csproj", "{75A42871-3297-42F4-BCFD-D95AFCD9171E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UntappdWindowsService.Client", "UntappdWindowsService.WCFСlient\UntappdWindowsService.Client.csproj", "{044D958F-CF63-4E57-9B12-7F52D852389D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UntappdWindowsService.Client", "UntappdWindowsService.WCFClient\UntappdWindowsService.Client.csproj", "{044D958F-CF63-4E57-9B12-7F52D852389D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
