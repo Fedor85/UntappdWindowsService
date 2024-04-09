@@ -1,13 +1,13 @@
-﻿using UntappdWindowsService.Interfaces;
+﻿using UntappdWindowsService.Extension.Interfaces;
+using UntappdWindowsService.Interfaces;
 
 namespace UntappdWindowsService.WCFService.Services
 {
-    public class ClearTemp(ILogger logger): IClearTemp
+    public class ClearTemp(IClearTempFilesService clearTempFilesService): IClearTempContract
     {
-        public const string ServiceEndpoint = "/UntappdWindowsService/ClearTemp";
-        public void RegisterProcessesIdByTempFiles(string processeId, string tempFilesPath)
+        public void RegisterProcessesIdByTempFiles(int processeId, string tempFilesPath)
         {
-            logger?.Log($"processeId: {processeId}, tempFilesPath: {tempFilesPath}");
+            clearTempFilesService.RegisterProcessesIdByTempFiles(processeId, tempFilesPath);
         }
     }
 }

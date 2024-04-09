@@ -6,8 +6,6 @@
 
         void RunAsync();
 
-        void Run();
-
         void StopAsync();
     }
 }

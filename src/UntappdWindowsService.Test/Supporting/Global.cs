@@ -4,6 +4,7 @@ using UntappdWindowsService.Extension.Interfaces;
 using UntappdWindowsService.Infrastructure;
 using UntappdWindowsService.Interfaces;
 using UntappdWindowsService.WCFService;
+using UntappdWindowsService.Сlient;
 
 namespace UntappdWindowsService.Test
 {
@@ -18,6 +19,7 @@ namespace UntappdWindowsService.Test
             services.AddSingleton<ILogger, FileLogger>();
             services.AddSingleton<IClearTempFilesService, ClearTempFilesService>();
             services.AddSingleton<IWindowsWCFService, UntappdWindowsWCFService>();
+            services.AddSingleton<IUntappdWindowsServiceClient, UntappdWindowsServiceClient>();
             ServiceProvider = services.BuildServiceProvider();
         }
     }

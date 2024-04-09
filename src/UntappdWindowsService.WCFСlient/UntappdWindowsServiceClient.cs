@@ -8,16 +8,18 @@ namespace UntappdWindowsService.Сlient
     {
         private ChannelFactory<IClearTempContract> factory;
 
+        public UntappdWindowsServiceClient(IConfigurationService configurationService) : this(configurationService.UntappdWCFServiceUrlFull) { }
+
         public UntappdWindowsServiceClient(): this( new ConfigurationService().UntappdWCFServiceUrlFull) {}
 
         public void SetTempFilesByProcessesId(int processeId, string tempFilesPath)
         {
             ChannelFactory<IClearTempContract> channelFactory = GetChannelFactory();
-            IClearTempContract channel = channelFactory.CreateChannel();
-            IClientChannel clientChannel = channel as IClientChannel;
+            IClearTempContract contractChannel = channelFactory.CreateChannel();
+            IClientChannel clientChannel = contractChannel as IClientChannel;
             clientChannel.Open();
 
-            channel.RegisterProcessesIdByTempFiles(processeId, tempFilesPath);
+            contractChannel.RegisterProcessesIdByTempFiles(processeId, tempFilesPath);
 
             clientChannel.Close();
         }

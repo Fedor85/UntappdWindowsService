@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
+using UntappdWindowsService.Extension;
 using UntappdWindowsService.Interfaces;
 
 namespace UntappdWindowsService
@@ -9,7 +10,7 @@ namespace UntappdWindowsService
         {
             try
             {
-                logger.Log("Start UntappdWindowsService");
+                logger.Log($"Start {Constants.ServiceName}");
                 service.Initialize();
                 service.RunAsync();
             }
@@ -30,7 +31,7 @@ namespace UntappdWindowsService
             try
             {
                 service.StopAsync();
-                logger.Log("Stop UntappdWindowsService");
+                logger.Log($"Stop {Constants.ServiceName}");
             }
             catch (Exception e)
             {

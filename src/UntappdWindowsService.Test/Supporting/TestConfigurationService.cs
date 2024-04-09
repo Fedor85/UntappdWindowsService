@@ -6,7 +6,7 @@ namespace UntappdWindowsService.Test
     {
         public TestConfigurationService()
         {
-            LogFilePath = Path.Combine(TestHelper.GetSolutionDirectory(), "TestResults", "Test", "TestLog.txt");
+            LogFilePath = Path.Combine(TestHelper.GetSolutionDirectory(), Constants.TestFolder, "TestLog.txt");
 
             UntappdWCFServiceUrlBase = "http://localhost:5556";
 
