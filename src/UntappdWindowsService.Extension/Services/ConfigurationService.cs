@@ -8,17 +8,20 @@ namespace UntappdWindowsService.Extension.Services
     {
         private string UntappdWCFServiceUrlBaseKey = "UntappdWCFServiceUrlBase";
 
-        public string LogFilePath { get; protected set; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"{Constants.ServiceName}Log.txt");
+        public string LogFilePath { get; protected init; }
         
-        public string UntappdWCFServiceUrlBase { get; protected set; }
+        public string UntappdWCFServiceUrlBase { get; protected init; }
 
-        public string UntappdWCFServiceUrlEndpoint { get; protected set; } = Constants.UntappdWCFServiceUrlEndpoint;
+        public string UntappdWCFServiceUrlEndpoint { get; protected init; }
 
-        public string UntappdWCFServiceUrlFull { get; protected set; } = Constants.UntappdWCFServiceUrlFull;
+        public string UntappdWCFServiceUrlFull { get; protected init; }
 
         public ConfigurationService()
         {
+            LogFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"{Constants.ServiceName}Log.txt");
             UntappdWCFServiceUrlBase = GetUntappdWCFServiceUrlBase(Constants.UntappdWCFServiceUrlBase);
+            UntappdWCFServiceUrlEndpoint = Constants.UntappdWCFServiceUrlEndpoint;
+            UntappdWCFServiceUrlFull = $"{UntappdWCFServiceUrlBase}{UntappdWCFServiceUrlEndpoint}";
         }
 
         protected virtual string GetUntappdWCFServiceUrlBase( string defaultValue)
@@ -36,10 +39,10 @@ namespace UntappdWindowsService.Extension.Services
             if (type == typeof(object))
                 return null;
 
-            string thisAssemblyModuleName = Assembly.GetAssembly(type).ManifestModule.Name;
-            if (File.Exists($"{thisAssemblyModuleName}.config"))
+            string assemblyLocation = Assembly.GetAssembly(type).Location;
+            if (File.Exists($"{assemblyLocation}.config"))
             {
-                Configuration thisConfiguration = ConfigurationManager.OpenExeConfiguration(thisAssemblyModuleName);
+                Configuration thisConfiguration = ConfigurationManager.OpenExeConfiguration(assemblyLocation);
                 if (thisConfiguration.AppSettings.Settings.AllKeys.Contains(UntappdWCFServiceUrlBaseKey))
                 {
                     string thisAssemblyConfigValue = thisConfiguration.AppSettings.Settings[UntappdWCFServiceUrlBaseKey].Value;
@@ -47,7 +50,6 @@ namespace UntappdWindowsService.Extension.Services
                         return thisAssemblyConfigValue;
                 }
             }
-
             return GetConfigValueByBaseType(type.BaseType);
         }
     }
