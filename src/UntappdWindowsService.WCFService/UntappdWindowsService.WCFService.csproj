@@ -10,10 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CoreWCF.Http" Version="1.5.2" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\UntappdWindowsService.Extension\UntappdWindowsService.Extension.csproj" />
     <ProjectReference Include="..\UntappdWindowsService.Interfaces\UntappdWindowsService.Interfaces.csproj" />
   </ItemGroup>
