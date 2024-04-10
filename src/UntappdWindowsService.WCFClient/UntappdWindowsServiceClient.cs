@@ -24,6 +24,11 @@ namespace UntappdWindowsService.Client
             clientChannel.Close();
         }
 
+        public async Task SetTempFilesByProcessesIdAsync(int processeId, string tempFilesPath)
+        {
+            await Task.Run(() => SetTempFilesByProcessesId(processeId, tempFilesPath));
+        }
+
         private ChannelFactory<IClearTempContract> GetChannelFactory()
         {
             if (factory == null)
