@@ -10,7 +10,17 @@
     <Version>$(AssemblyVersion)</Version>
     <PackageOutputPath>..\..\build\packages\</PackageOutputPath>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Description>
+      Client by Untappd Windows Service.
+    </Description>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="README.txt" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UntappdWindowsService.Extension.dll.config" IncludeInPackage="true"/>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.ServiceModel.Http" Version="8.0.0" />
