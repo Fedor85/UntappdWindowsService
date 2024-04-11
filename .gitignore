@@ -13,6 +13,7 @@ src/*/bin/
 
 #build
 build/*
+!build/packages/
 
 #TestResults
 src/TestResults/*
