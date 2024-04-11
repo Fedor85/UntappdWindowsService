@@ -1,4 +1,4 @@
-SET installdir=E:\Services
+SET installdir=E:\Services\UntappdWindowsService
 
 Del /S /Q %installdir%\*
 call PublishService.cmd
