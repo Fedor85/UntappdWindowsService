@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using UntappdWindowsService.Interfaces;
 
 namespace UntappdWindowsService.Domain
@@ -15,13 +16,22 @@ namespace UntappdWindowsService.Domain
             }
 
             logger.Log($"Registered processe Id: {processeId} [{process.ProcessName}]; tempFilesPath: {tempFilesPath}");
-            NotifyOnProcessExits(process, () => DeleteDirectory(tempFilesPath));
+            NotifyOnProcessExits(process, () => StopProcessHandler(processeId, process.ProcessName, tempFilesPath));
+        }
+
+        private void StopProcessHandler(int processeId, string processName, string directoryPath)
+        {
+            logger.Log($"Stop processe Id: {processeId} [{processName}]");
+            DeleteDirectory(directoryPath);
         }
 
         private void DeleteDirectory(string directoryPath)
         {
             if (!Directory.Exists(directoryPath))
+            {
+                logger.Log($"Not found directory: {directoryPath}");
                 return;
+            }
 
             Directory.Delete(directoryPath, true);
             logger.Log($"Delete directory: {directoryPath}");
