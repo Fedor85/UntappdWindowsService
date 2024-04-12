@@ -6,7 +6,7 @@ Add to Startup project in App.config:
     <add key="UntappdWCFServiceUrlBase" value="" />
   </appSettings>
  
- Or this project add file UntappdWindowsService.Extension.dll.config (Copy Always), example content include in package :
+ Or this root project add file UntappdWindowsService.Extension.dll.config (Copy Always), example link content include in package UntappdWindowsService.Extension.dll.Example.config:
 
  <?xml version="1.0" encoding="utf-8" ?>
 <configuration>

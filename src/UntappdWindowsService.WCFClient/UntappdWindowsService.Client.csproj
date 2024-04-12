@@ -16,10 +16,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="README.txt" Pack="true" PackagePath="\"/>
+    <None Update="README.txt" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UntappdWindowsService.Extension.dll.config" IncludeInPackage="true"/>
+    <Content Include="UntappdWindowsService.Extension.dll.Example.config" IncludeInPackage="true" />
   </ItemGroup>
 
   <ItemGroup>
