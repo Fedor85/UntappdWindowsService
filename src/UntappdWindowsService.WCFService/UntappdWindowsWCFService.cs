@@ -39,10 +39,10 @@ namespace UntappdWindowsService.WCFService
             if (webApplication == null)
                 throw new ApplicationException($"Call initialize {GetType().Name}");
 
-            webApplication.RunAsync();
 
+            webApplication.RunAsync();
             logger?.IncrementCurrentLevel();
-            logger?.Log($"Run {GetType().Name} by URL: {GetFullUsedUrls()}.");
+            logger?.Log(GetMessage("Run"));
         }
 
         public void StopAsync()
@@ -50,16 +50,21 @@ namespace UntappdWindowsService.WCFService
             if (webApplication == null)
                 throw new ApplicationException($"{GetType().Name} is not Run");
 
-            webApplication.StopAsync();
 
-            logger?.Log($"Stop {GetType().Name}.");
+            logger?.Log(GetMessage("Stop"));
             logger?.DecrementCurrentLevel();
+            webApplication.StopAsync();
         }
 
         private void AddServicesModels(IServiceBuilder builder)
         {
             builder.AddService<ClearTemp>((_) => { })
                 .AddServiceEndpoint<ClearTemp, IClearTempContract>(new BasicHttpBinding(), configurationService.UntappdWCFServiceUrlEndpoint);
+        }
+
+        private string GetMessage(string processesName)
+        {
+            return $"{processesName} {GetType().Name} by URL: {GetFullUsedUrls()}.";
         }
 
         private string GetFullUsedUrls()

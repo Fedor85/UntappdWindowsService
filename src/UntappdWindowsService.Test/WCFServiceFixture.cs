@@ -14,14 +14,20 @@ namespace UntappdWindowsService.Test
         [TestMethod, Test]
         public void TestWCFService()
         {
+            ILogger logger = Global.ServiceProvider.GetService<ILogger>();
+            logger.IncrementCurrentLevel();
+            logger.Log($"Start {Extension.Constants.ServiceName}");
+
             IWindowsWCFService windowsWcfService = Global.ServiceProvider.GetService<IWindowsWCFService>();
             windowsWcfService.Initialize();
             windowsWcfService.RunAsync();
 
             IUntappdWindowsServiceClient client = Global.ServiceProvider.GetService<IUntappdWindowsServiceClient>();
             TestClient(client);
-
             windowsWcfService.StopAsync();
+
+            logger.Log($"Stop {Extension.Constants.ServiceName}.");
+            logger.DecrementCurrentLevel();
         }
 
         [TestMethod, Test]
@@ -43,6 +49,7 @@ namespace UntappdWindowsService.Test
             newProcess.Kill();
             newProcess.WaitForExit();
             newProcess.Dispose();
+            Thread.Sleep(1500);
         }
     }
 }

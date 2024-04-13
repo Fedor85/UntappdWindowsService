@@ -6,8 +6,6 @@ namespace UntappdWindowsService
 {
     public class Worker(IWindowsWCFService service, ILogger logger) : BackgroundService
     {
-        private readonly int logLevel = 1;
-
         public override Task StartAsync(CancellationToken cancellationToken)
         {
             try
