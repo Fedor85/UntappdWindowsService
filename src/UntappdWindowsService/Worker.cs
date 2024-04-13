@@ -6,11 +6,15 @@ namespace UntappdWindowsService
 {
     public class Worker(IWindowsWCFService service, ILogger logger) : BackgroundService
     {
+        private readonly int logLevel = 1;
+
         public override Task StartAsync(CancellationToken cancellationToken)
         {
             try
             {
+                logger.IncrementCurrentLevel();
                 logger.Log($"Start {Constants.ServiceName}");
+
                 service.Initialize();
                 service.RunAsync();
             }
@@ -31,7 +35,9 @@ namespace UntappdWindowsService
             try
             {
                 service.StopAsync();
-                logger.Log($"Stop {Constants.ServiceName}");
+
+                logger.Log($"Stop {Constants.ServiceName}.", logLevel);
+                logger.DecrementCurrentLevel();
             }
             catch (Exception e)
             {

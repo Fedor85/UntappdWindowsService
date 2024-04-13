@@ -16,6 +16,7 @@ namespace UntappdWindowsService.WCFService
                                           ILogger logger,
                                           IClearTempFilesService clearTempFilesService) : IWindowsWCFService
     {
+        
         private WebApplication webApplication;
 
         public void Initialize()
@@ -39,7 +40,9 @@ namespace UntappdWindowsService.WCFService
                 throw new ApplicationException($"Call initialize {GetType().Name}");
 
             webApplication.RunAsync();
-            logger?.Log($"Run {GetType().Name} by URL: {GetFullUsedUrls()}");
+
+            logger?.IncrementCurrentLevel();
+            logger?.Log($"Run {GetType().Name} by URL: {GetFullUsedUrls()}.");
         }
 
         public void StopAsync()
@@ -48,7 +51,9 @@ namespace UntappdWindowsService.WCFService
                 throw new ApplicationException($"{GetType().Name} is not Run");
 
             webApplication.StopAsync();
-            logger?.Log($"Stop {GetType().Name}");
+
+            logger?.Log($"Stop {GetType().Name}.");
+            logger?.DecrementCurrentLevel();
         }
 
         private void AddServicesModels(IServiceBuilder builder)
