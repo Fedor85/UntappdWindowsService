@@ -2,8 +2,8 @@
 {
     public interface IUntappdWindowsServiceClient
     {
-        void SetTempFilesByProcessesId(int processeId, string tempFilesPath);
+        void SetTempDirectoryByProcessId(int processId, string tempDirectory);
 
-        Task SetTempFilesByProcessesIdAsync(int processeId, string tempFilesPath);
+        Task SetTempDirectoryByProcessIdAsync(int processId, string tempDirectory);
     }
 }

@@ -15,7 +15,7 @@ namespace UntappdWindowsService.WCFService
 {
     public class UntappdWindowsWCFService(IConfigurationService configurationService, 
                                           ILogger logger,
-                                          IClearTempFilesService clearTempFilesService) : IWindowsWCFService
+                                          IClearTempDirectoryService clearTempDirectoryService) : IWindowsWCFService
     {
 
         private string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -28,7 +28,7 @@ namespace UntappdWindowsService.WCFService
             webApplicationBuilder.WebHost.UseUrls(configurationService.UntappdWCFServiceUrlBase);
             webApplicationBuilder.Services.AddServiceModelServices().AddServiceModelMetadata();
 
-            webApplicationBuilder.Services.AddSingleton(clearTempFilesService);
+            webApplicationBuilder.Services.AddSingleton(clearTempDirectoryService);
             webApplicationBuilder.Services.AddSingleton<ClearTemp>();
 
             webApplication = webApplicationBuilder.Build();

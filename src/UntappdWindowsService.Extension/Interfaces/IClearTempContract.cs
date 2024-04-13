@@ -4,6 +4,6 @@
     public interface IClearTempContract
     {
         [System.ServiceModel.OperationContract, CoreWCF.OperationContract]
-        void RegisterProcessesIdByTempFiles(int processeId, string tempFilesPath);
+        void RegisterTempDirectoryByProcessId(int processId, string tempDirectory);
     }
 }

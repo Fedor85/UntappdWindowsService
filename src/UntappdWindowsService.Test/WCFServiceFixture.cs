@@ -41,14 +41,14 @@ namespace UntappdWindowsService.Test
         {
             string tempDirectory = Path.Combine(TestHelper.GetSolutionDirectory(), Constants.TestFolder, "TestTemp");
             TestHelper.CreateTempFiles(tempDirectory, 5);
-            client.SetTempFilesByProcessesId(-1, tempDirectory);
-            client.SetTempFilesByProcessesId(-2, tempDirectory);
+            client.SetTempDirectoryByProcessId(-1, tempDirectory);
+            client.SetTempDirectoryByProcessId(-2, tempDirectory);
 
             Process newProcess = Process.Start("Utils/ConsoleProcess/ConsoleProcess.exe");
 
-            client.SetTempFilesByProcessesId(newProcess.Id, tempDirectory);
-            client.SetTempFilesByProcessesId(newProcess.Id, tempDirectory);
-            client.SetTempFilesByProcessesId(newProcess.Id, Path.Combine(tempDirectory, "FakeFolder"));
+            client.SetTempDirectoryByProcessId(newProcess.Id, tempDirectory);
+            client.SetTempDirectoryByProcessId(newProcess.Id, tempDirectory);
+            client.SetTempDirectoryByProcessId(newProcess.Id, Path.Combine(tempDirectory, "FakeFolder"));
 
             newProcess.Kill();
             newProcess.WaitForExit();

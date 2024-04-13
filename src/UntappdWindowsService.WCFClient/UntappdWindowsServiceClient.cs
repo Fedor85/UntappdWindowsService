@@ -12,21 +12,21 @@ namespace UntappdWindowsService.Client
 
         public UntappdWindowsServiceClient(): this( new ConfigurationService().UntappdWCFServiceUrlFull) {}
 
-        public void SetTempFilesByProcessesId(int processeId, string tempFilesPath)
+        public void SetTempDirectoryByProcessId(int processId, string tempDirectory)
         {
             ChannelFactory<IClearTempContract> channelFactory = GetChannelFactory();
             IClearTempContract contractChannel = channelFactory.CreateChannel();
             IClientChannel clientChannel = contractChannel as IClientChannel;
             clientChannel.Open();
 
-            contractChannel.RegisterProcessesIdByTempFiles(processeId, tempFilesPath);
+            contractChannel.RegisterTempDirectoryByProcessId(processId, tempDirectory);
 
             clientChannel.Close();
         }
 
-        public async Task SetTempFilesByProcessesIdAsync(int processeId, string tempFilesPath)
+        public async Task SetTempDirectoryByProcessIdAsync(int processId, string tempDirectory)
         {
-            await Task.Run(() => SetTempFilesByProcessesId(processeId, tempFilesPath));
+            await Task.Run(() => SetTempDirectoryByProcessId(processId, tempDirectory));
         }
 
         private ChannelFactory<IClearTempContract> GetChannelFactory()

@@ -3,11 +3,11 @@ using UntappdWindowsService.Interfaces;
 
 namespace UntappdWindowsService.WCFService.Services
 {
-    public class ClearTemp(IClearTempFilesService clearTempFilesService): IClearTempContract
+    public class ClearTemp(IClearTempDirectoryService clearTempDirectoryService): IClearTempContract
     {
-        public void RegisterProcessesIdByTempFiles(int processeId, string tempFilesPath)
+        public void RegisterTempDirectoryByProcessId(int processId, string tempFilesPath)
         {
-            clearTempFilesService.RegisterProcessesIdByTempFiles(processeId, tempFilesPath);
+            clearTempDirectoryService.RegisterTempDirectoryByProcessId(processId, tempFilesPath);
         }
     }
 }

@@ -7,7 +7,6 @@ using UntappdWindowsService.Extension.Services;
 using UntappdWindowsService.Infrastructure;
 using UntappdWindowsService.Interfaces;
 using UntappdWindowsService.WCFService;
-using ILogger = UntappdWindowsService.Interfaces.ILogger;
 
 namespace UntappdWindowsService
 {
@@ -29,7 +28,7 @@ namespace UntappdWindowsService
         {
             hostApplicationBuilder.Services.AddSingleton<IConfigurationService, ConfigurationService>();
             hostApplicationBuilder.Services.AddSingleton<ILogger, FileLogger>();
-            hostApplicationBuilder.Services.AddSingleton<IClearTempFilesService, ClearTempFilesService>();
+            hostApplicationBuilder.Services.AddSingleton<IClearTempDirectoryService, ClearTempDirectoryService>();
             hostApplicationBuilder.Services.AddSingleton<IWindowsWCFService, UntappdWindowsWCFService>();
         }
 

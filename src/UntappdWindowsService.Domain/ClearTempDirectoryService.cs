@@ -3,11 +3,11 @@ using UntappdWindowsService.Interfaces;
 
 namespace UntappdWindowsService.Domain
 {
-    public class ClearTempFilesService(ILogger logger) : IClearTempFilesService
+    public class ClearTempDirectoryService(ILogger logger) : IClearTempDirectoryService
     {
         private List<ProcessContainer> ProcessContainers = new();
 
-        public void RegisterProcessesIdByTempFiles(int processId, string tempDirectory)
+        public void RegisterTempDirectoryByProcessId(int processId, string tempDirectory)
         {
             Process process = RegisteredProcess(processId, tempDirectory);
             if (process != null)
@@ -74,11 +74,11 @@ namespace UntappdWindowsService.Domain
             return process;
         }
 
-        private Process GetProcess(int processeId)
+        private Process GetProcess(int processId)
         {
             try
             {
-                return Process.GetProcessById(processeId);
+                return Process.GetProcessById(processId);
             }
             catch (Exception e)
             {
