@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using CoreWCF;
 using CoreWCF.Configuration;
 using CoreWCF.Description;
@@ -16,7 +17,9 @@ namespace UntappdWindowsService.WCFService
                                           ILogger logger,
                                           IClearTempFilesService clearTempFilesService) : IWindowsWCFService
     {
-        
+
+        private string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
         private WebApplication webApplication;
 
         public void Initialize()
@@ -64,7 +67,7 @@ namespace UntappdWindowsService.WCFService
 
         private string GetMessage(string processesName)
         {
-            return $"{processesName} {GetType().Name} by URL: {GetFullUsedUrls()}.";
+            return $"{processesName} {GetType().Name} [version: {version}] by URL: {GetFullUsedUrls()}.";
         }
 
         private string GetFullUsedUrls()

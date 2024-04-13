@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
+using System.Reflection;
 using UntappdWindowsService.Extension;
 using UntappdWindowsService.Interfaces;
 
@@ -6,12 +7,14 @@ namespace UntappdWindowsService
 {
     public class Worker(IWindowsWCFService service, ILogger logger) : BackgroundService
     {
+        private string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
         public override Task StartAsync(CancellationToken cancellationToken)
         {
             try
             {
                 logger.IncrementCurrentLevel();
-                logger.Log($"Start {Constants.ServiceName}");
+                logger.Log(GetMessage("Start"));
 
                 service.Initialize();
                 service.RunAsync();
@@ -34,7 +37,7 @@ namespace UntappdWindowsService
             {
                 service.StopAsync();
 
-                logger.Log($"Stop {Constants.ServiceName}.");
+                logger.Log(GetMessage("Stop"));
                 logger.DecrementCurrentLevel();
             }
             catch (Exception e)
@@ -42,6 +45,11 @@ namespace UntappdWindowsService
                 Program.StopService(logger, e);
             }
             return base.StopAsync(cancellationToken);
+        }
+
+        private string GetMessage(string processesName)
+        {
+            return $"{processesName} {Constants.ServiceName} [version: {version}].";
         }
     }
 }
