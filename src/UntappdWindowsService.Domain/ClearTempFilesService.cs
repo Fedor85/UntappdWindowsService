@@ -5,24 +5,23 @@ namespace UntappdWindowsService.Domain
 {
     public class ClearTempFilesService(ILogger logger) : IClearTempFilesService
     {
-        public void RegisterProcessesIdByTempFiles(int processeId, string tempFilesPath)
-        {
-            Process process = GetProcess(processeId);
-            if (process == null)
-            {
-                logger.Log($"ProcesseId: {processeId} not found.", 1);
-                return;
-            }
+        private List<ProcessContainer> ProcessContainers = new();
 
-            logger.Log($"Registered processe Id: {processeId} [{process.ProcessName}].", 1);
-            logger.Log($"Temp directory: {tempFilesPath}.", 2);
-            NotifyOnProcessExits(process, () => StopProcessHandler(processeId, process.ProcessName, tempFilesPath));
+        public void RegisterProcessesIdByTempFiles(int processId, string tempDirectory)
+        {
+            Process process = RegisteredProcess(processId, tempDirectory);
+            if (process != null)
+                NotifyOnProcessExits(process, () => StopProcessHandler(processId));
         }
 
-        private void StopProcessHandler(int processeId, string processName, string directoryPath)
+        private void StopProcessHandler(int processId)
         {
-            logger.Log($"Stop processe Id: {processeId} [{processName}].", 1);
-            DeleteDirectory(directoryPath);
+            ProcessContainer processContainer = ProcessContainers.Find(item => item.Id == processId);
+            logger.Log($"Stop process Id: {processContainer.Id} [{processContainer.Name}].", 1);
+            foreach (string processTempDirectory in processContainer.TempDirectories)
+                DeleteDirectory(processTempDirectory);
+
+            ProcessContainers.Remove(processContainer);
         }
 
         private void DeleteDirectory(string directoryPath)
@@ -40,6 +39,39 @@ namespace UntappdWindowsService.Domain
         private void NotifyOnProcessExits(Process process, Action action)
         {
             Task.Run(process.WaitForExit).ContinueWith(task => action());
+        }
+
+        private Process RegisteredProcess(int processId, string tempDirectory)
+        {
+            Process process = GetProcess(processId);
+            if (process == null)
+            {
+                logger.Log($"ProcessId: {processId} not found.", 1);
+                return null;
+            }
+
+            ProcessContainer processContainer = ProcessContainers.Find(item => item.Id == processId);
+            if (processContainer != null)
+            {
+                if (processContainer.TempDirectories.Contains(tempDirectory))
+                {
+                    logger.Log($"Process Id: {processId} [{process.ProcessName}] duplicate temp directory: {tempDirectory}", 2);
+                }
+                else
+                {
+                    processContainer.TempDirectories.Add(tempDirectory);
+                    logger.Log($"Process Id: {processId} [{process.ProcessName}] add temp directory: {tempDirectory}", 2);
+                }
+                return null;
+            }
+
+            processContainer = new ProcessContainer(processId, process.ProcessName);
+            processContainer.TempDirectories.Add(tempDirectory);
+            ProcessContainers.Add(processContainer);
+
+            logger.Log($"Registered process Id: {processId} [{process.ProcessName}].", 1);
+            logger.Log($"Temp directory: {tempDirectory}.", 2);
+            return process;
         }
 
         private Process GetProcess(int processeId)

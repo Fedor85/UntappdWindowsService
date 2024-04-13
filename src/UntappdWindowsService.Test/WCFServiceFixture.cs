@@ -43,13 +43,17 @@ namespace UntappdWindowsService.Test
             TestHelper.CreateTempFiles(tempDirectory, 5);
             client.SetTempFilesByProcessesId(-1, tempDirectory);
             client.SetTempFilesByProcessesId(-2, tempDirectory);
+
             Process newProcess = Process.Start("Utils/ConsoleProcess/ConsoleProcess.exe");
+
             client.SetTempFilesByProcessesId(newProcess.Id, tempDirectory);
+            client.SetTempFilesByProcessesId(newProcess.Id, tempDirectory);
+            client.SetTempFilesByProcessesId(newProcess.Id, Path.Combine(tempDirectory, "FakeFolder"));
 
             newProcess.Kill();
             newProcess.WaitForExit();
             newProcess.Dispose();
-            Thread.Sleep(1500);
+            Thread.Sleep(3000);
         }
     }
 }
