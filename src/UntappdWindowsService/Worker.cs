@@ -36,7 +36,7 @@ namespace UntappdWindowsService
             {
                 service.StopAsync();
 
-                logger.Log($"Stop {Constants.ServiceName}.", logLevel);
+                logger.Log($"Stop {Constants.ServiceName}.");
                 logger.DecrementCurrentLevel();
             }
             catch (Exception e)
