@@ -15,7 +15,7 @@ namespace UntappdWindowsService.WCFService
 {
     public class UntappdWindowsWCFService(IConfigurationService configurationService, 
                                           ILogger logger,
-                                          IClearTempDirectoryService clearTempDirectoryService) : IWindowsWCFService
+                                          IClearTempDirectoryService clearTempDirectoryService) : IWorkerService
     {
 
         private string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -42,10 +42,11 @@ namespace UntappdWindowsService.WCFService
             if (webApplication == null)
                 throw new ApplicationException($"Call initialize {GetType().Name}");
 
-
             webApplication.RunAsync();
             logger?.IncrementCurrentLevel();
             logger?.Log(GetMessage("Run"));
+
+            clearTempDirectoryService.Initialize();
         }
 
         public void StopAsync()
@@ -53,6 +54,7 @@ namespace UntappdWindowsService.WCFService
             if (webApplication == null)
                 throw new ApplicationException($"{GetType().Name} is not Run");
 
+            clearTempDirectoryService.Close();
 
             logger?.Log(GetMessage("Stop"));
             logger?.DecrementCurrentLevel();

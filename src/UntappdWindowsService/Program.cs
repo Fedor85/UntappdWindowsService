@@ -29,7 +29,7 @@ namespace UntappdWindowsService
             hostApplicationBuilder.Services.AddSingleton<IConfigurationService, ConfigurationService>();
             hostApplicationBuilder.Services.AddSingleton<ILogger, FileLogger>();
             hostApplicationBuilder.Services.AddSingleton<IClearTempDirectoryService, ClearTempDirectoryService>();
-            hostApplicationBuilder.Services.AddSingleton<IWindowsWCFService, UntappdWindowsWCFService>();
+            hostApplicationBuilder.Services.AddSingleton<IWorkerService, UntappdWindowsWCFService>();
         }
 
         private static void ConfigureWindowsService(WindowsServiceLifetimeOptions options)

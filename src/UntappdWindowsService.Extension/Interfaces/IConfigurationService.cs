@@ -4,6 +4,8 @@
     {
         string LogFilePath { get; }
 
+        string ProcessTempDirectoryBackupFilePath { get; }
+
         string UntappdWCFServiceUrlBase { get; }
 
         string UntappdWCFServiceUrlEndpoint { get; }

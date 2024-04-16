@@ -5,6 +5,7 @@ using NUnit.Framework;
 using UntappdWindowsService.Client;
 using UntappdWindowsService.Extension.Interfaces;
 using UntappdWindowsService.Interfaces;
+using UntappdWindowsService.WCFService;
 
 namespace UntappdWindowsService.Test
 {
@@ -18,7 +19,7 @@ namespace UntappdWindowsService.Test
             logger.IncrementCurrentLevel();
             logger.Log($"Start {Extension.Constants.ServiceName}");
 
-            IWindowsWCFService windowsWcfService = Global.ServiceProvider.GetService<IWindowsWCFService>();
+            UntappdWindowsWCFService windowsWcfService = Global.ServiceProvider.GetService<UntappdWindowsWCFService>();
             windowsWcfService.Initialize();
             windowsWcfService.RunAsync();
 

@@ -5,7 +5,7 @@ namespace UntappdWindowsService.Infrastructure
 {
     public class FileLogger(IConfigurationService configurationService) : ILogger
     {
-        private readonly string filePath = FileHelper.GetFilePath(configurationService.LogFilePath);
+        private readonly string logFile = FileHelper.GetFilePath(configurationService.LogFilePath);
 
         private int currentLevel = 0;
 
@@ -27,7 +27,7 @@ namespace UntappdWindowsService.Infrastructure
         {
             lock (locker)
             {
-                using StreamWriter writer = new StreamWriter(filePath, true);
+                using StreamWriter writer = new StreamWriter(logFile, true);
                 writer.WriteLine($"[{DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")}]:{GetLevel(level)}{message}");
                 writer.Flush();
             }

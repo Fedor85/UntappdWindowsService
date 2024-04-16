@@ -1,11 +1,59 @@
 ﻿using System.Diagnostics;
+using UntappdWindowsService.Extension.Interfaces;
+using UntappdWindowsService.Infrastructure;
 using UntappdWindowsService.Interfaces;
 
 namespace UntappdWindowsService.Domain
 {
-    public class ClearTempDirectoryService(ILogger logger) : IClearTempDirectoryService
+    public class ClearTempDirectoryService(IConfigurationService configurationService, ILogger logger) : IClearTempDirectoryService
     {
-        private List<ProcessContainer> ProcessContainers = new();
+        private readonly string backupFile = FileHelper.GetFilePath(configurationService.ProcessTempDirectoryBackupFilePath);
+
+        private List<ProcessContainer> processContainers = new();
+
+        public void Initialize()
+        {
+            processContainers.Clear();
+            LoadBackupProcessContainers();
+        }
+
+        public void Close()
+        {
+            if (processContainers.Count > 0)
+            {
+                foreach (ProcessContainer process in processContainers)
+                {
+                    logger.Log($"Save process Id: {process.Id} [{process.Name}].", 1);
+                    foreach (string directory in process.TempDirectories)
+                        logger.Log($"Temp directory: {directory}.", 2);
+                } 
+            }
+            FileHelper.SaveFile(backupFile, processContainers);
+        }
+
+        private void LoadBackupProcessContainers()
+        {
+            List<ProcessContainer> processContainers = FileHelper.OpenFileToList<ProcessContainer>(backupFile);
+            if (processContainers == null || processContainers.Count == 0)
+                return;
+
+            logger.Log($"Loaded by {backupFile}", 1);
+            foreach (ProcessContainer processContainer in processContainers)
+            {
+                Process process = GetProcess(processContainer.Id);
+                if (process == null || !process.ProcessName.Equals(processContainer.Name))
+                {
+                    logger.Log($"Process {processContainer.Id} [{processContainer.Name}] not found or is different.", 1);
+                    foreach (string directory in processContainer.TempDirectories)
+                        DeleteDirectory(directory);
+                }
+                else
+                {
+                    foreach (string directory in processContainer.TempDirectories)
+                        RegisterTempDirectoryByProcessId(processContainer.Id, directory);
+                }
+            }
+        }
 
         public void RegisterTempDirectoryByProcessId(int processId, string tempDirectory)
         {
@@ -16,12 +64,12 @@ namespace UntappdWindowsService.Domain
 
         private void StopProcessHandler(int processId)
         {
-            ProcessContainer processContainer = ProcessContainers.Find(item => item.Id == processId);
+            ProcessContainer processContainer = processContainers.Find(item => item.Id == processId);
             logger.Log($"Stop process Id: {processContainer.Id} [{processContainer.Name}].", 1);
             foreach (string processTempDirectory in processContainer.TempDirectories)
                 DeleteDirectory(processTempDirectory);
 
-            ProcessContainers.Remove(processContainer);
+            processContainers.Remove(processContainer);
         }
 
         private void DeleteDirectory(string directoryPath)
@@ -50,7 +98,7 @@ namespace UntappdWindowsService.Domain
                 return null;
             }
 
-            ProcessContainer processContainer = ProcessContainers.Find(item => item.Id == processId);
+            ProcessContainer processContainer = processContainers.Find(item => item.Id == processId);
             if (processContainer != null)
             {
                 if (processContainer.TempDirectories.Contains(tempDirectory))
@@ -67,7 +115,7 @@ namespace UntappdWindowsService.Domain
 
             processContainer = new ProcessContainer(processId, process.ProcessName);
             processContainer.TempDirectories.Add(tempDirectory);
-            ProcessContainers.Add(processContainer);
+            processContainers.Add(processContainer);
 
             logger.Log($"Registered process Id: {processId} [{process.ProcessName}].", 1);
             logger.Log($"Temp directory: {tempDirectory}.", 2);

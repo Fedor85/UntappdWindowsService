@@ -5,7 +5,7 @@ using UntappdWindowsService.Interfaces;
 
 namespace UntappdWindowsService
 {
-    public class Worker(IWindowsWCFService service, ILogger logger) : BackgroundService
+    public class Worker(IWorkerService service, ILogger logger) : BackgroundService
     {
         private string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 

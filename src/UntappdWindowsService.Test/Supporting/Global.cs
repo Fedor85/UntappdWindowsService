@@ -18,7 +18,7 @@ namespace UntappdWindowsService.Test
             services.AddSingleton<IConfigurationService, TestConfigurationService>();
             services.AddSingleton<ILogger, FileLogger>();
             services.AddSingleton<IClearTempDirectoryService, ClearTempDirectoryService>();
-            services.AddSingleton<IWindowsWCFService, UntappdWindowsWCFService>();
+            services.AddSingleton<UntappdWindowsWCFService>();
             services.AddSingleton<IUntappdWindowsServiceClient, UntappdWindowsServiceClient>();
             ServiceProvider = services.BuildServiceProvider();
         }

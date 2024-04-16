@@ -1,6 +1,6 @@
 ﻿namespace UntappdWindowsService.Interfaces
 {
-    public interface IWindowsWCFService
+    public interface IWorkerService
     {
         void Initialize();
 

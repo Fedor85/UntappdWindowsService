@@ -9,7 +9,9 @@ namespace UntappdWindowsService.Extension.Services
         private string UntappdWCFServiceUrlBaseKey = "UntappdWCFServiceUrlBase";
 
         public string LogFilePath { get; protected init; }
-        
+
+        public string ProcessTempDirectoryBackupFilePath { get; protected init; }
+
         public string UntappdWCFServiceUrlBase { get; protected init; }
 
         public string UntappdWCFServiceUrlEndpoint { get; protected init; }
@@ -19,6 +21,7 @@ namespace UntappdWindowsService.Extension.Services
         public ConfigurationService()
         {
             LogFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"{Constants.ServiceName}Log.txt");
+            ProcessTempDirectoryBackupFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ProcessTempDirectoryBackup.pcb");
             UntappdWCFServiceUrlBase = GetUntappdWCFServiceUrlBase(Constants.UntappdWCFServiceUrlBase);
             UntappdWCFServiceUrlEndpoint = Constants.UntappdWCFServiceUrlEndpoint;
             UntappdWCFServiceUrlFull = $"{UntappdWCFServiceUrlBase}{UntappdWCFServiceUrlEndpoint}";
